@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Quiz Question", fileName = "New Question")]
@@ -10,6 +11,12 @@ public class QuestionSO : ScriptableObject
     public string GetQuestion()
     {
         return question;
+    }
+
+    public string GetPlaceholderQuestion()
+    {
+
+        return question; 
     }
 
     public string GetAnswer(int index) {

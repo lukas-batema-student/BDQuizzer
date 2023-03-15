@@ -22,25 +22,50 @@ public class Quiz : MonoBehaviour
     [SerializeField] Image timerImage;
     Timer timer;
 
+    [Header("Scoring")]
+    [SerializeField] TextMeshProUGUI scoreText;
+    ScoreKeeper scoreKeeper;
+
+    [Header("Progress Bar")]
+    [SerializeField] Slider progressBar;
+
+    readonly static List<QuestionSO> readOnlyQuestions = new List<QuestionSO>();
+
+    public bool isComplete;
+
+    bool setupComplete = false;
+
     void Start()
     {
         timer = FindObjectOfType<Timer>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        progressBar.maxValue = questions.Count - 1;
+        progressBar.value = 0;
     }
 
     void Update()
     {
-        timerImage.fillAmount = timer.fillFraction;
-
-        if (timer.loadNextQuestion)
+        if (!setupComplete)
         {
-            hasAnsweredEarly = false;
+            hasAnsweredEarly = true;
             GetNextQuestion();
-            timer.loadNextQuestion = false;
+            timer.loadNextQuestion = true;
+
+            setupComplete = true;
         }
-        else if (!hasAnsweredEarly && !timer.isAnsweringQuestion)
+        else
         {
-            DisplayAnswer(-1);
-            SetButtonState(false);
+            if (timer.loadNextQuestion)
+            {
+                hasAnsweredEarly = false;
+                GetNextQuestion();
+                timer.loadNextQuestion = false;
+            }
+            else if (!hasAnsweredEarly && !timer.isAnsweringQuestion)
+            {
+                DisplayAnswer(-1);
+                SetButtonState(false);
+            }
         }
     }
 
@@ -50,6 +75,12 @@ public class Quiz : MonoBehaviour
         SetButtonState(false);
         hasAnsweredEarly = true;
         timer.CancelTimer();
+        scoreText.text = $"Score: {scoreKeeper.CalculateCurrentScore()}%";
+
+        if (progressBar.value == progressBar.maxValue)
+        {
+            isComplete = true;
+        }
     }
 
     void DisplayAnswer(int index)
@@ -57,6 +88,7 @@ public class Quiz : MonoBehaviour
         if (index == currentQuestion.GetCorrectAnswerIndex())
         {
             questionText.text = "You are one step closer to becoming a true BatemaDevelopment historian!";
+            scoreKeeper.IncrementCorrectAnswers();
         }
         else
         {
@@ -76,10 +108,8 @@ public class Quiz : MonoBehaviour
             SetDefaultButtonSprites();
             GetRandomQuestion();
             DisplayQuestion();
-        }
-        else
-        {
-            questionText.text = "You have completed the quiz!";
+            progressBar.value++;
+            scoreKeeper.IncrementQuestionsSeen();
         }
     }
 
