@@ -375,6 +375,55 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 692223626}
   m_SourcePrefab: {fileID: 100100000, guid: 2c2eab4009a8df149ad476775e1e3048, type: 3}
+--- !u!1 &111025915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 111025917}
+  - component: {fileID: 111025916}
+  m_Layer: 0
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &111025916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111025915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf94f621116adc54fb37050b2d59e834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToCompleteQuestion: 60
+  timeToShowCorrectAnswer: 30
+  loadNextQuestion: 0
+  isAnsweringQuestion: 1
+  fillFraction: 0
+--- !u!4 &111025917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111025915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1150.7091, y: 443.38058, z: 4.742487}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &208304431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7124556966001910350, guid: 2c2eab4009a8df149ad476775e1e3048, type: 3}
@@ -428,7 +477,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 208304434}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1741354323}
+        m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
+        m_MethodName: OnAnswerSelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &208304434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,9 +586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'BatemaDevelopment
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8db44864f17be2b4f95f70210f0d0669, type: 2}
   m_sharedMaterial: {fileID: -6993408724972300887, guid: 8db44864f17be2b4f95f70210f0d0669, type: 2}
@@ -749,7 +808,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 692223627}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1741354323}
+        m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
+        m_MethodName: OnAnswerSelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &692223627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,7 +917,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Win11React Project by blueedgetechno
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8db44864f17be2b4f95f70210f0d0669, type: 2}
   m_sharedMaterial: {fileID: -6993408724972300887, guid: 8db44864f17be2b4f95f70210f0d0669, type: 2}
@@ -1165,7 +1236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GameHogPlays YouTube Channel
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8db44864f17be2b4f95f70210f0d0669, type: 2}
   m_sharedMaterial: {fileID: -6993408724972300887, guid: 8db44864f17be2b4f95f70210f0d0669, type: 2}
@@ -1242,6 +1313,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912717653}
   m_CullTransparentMesh: 1
+--- !u!1 &912850455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 912850456}
+  - component: {fileID: 912850458}
+  - component: {fileID: 912850457}
+  m_Layer: 5
+  m_Name: Timer Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &912850456
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912850455}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1741354322}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 798, y: 353}
+  m_SizeDelta: {x: 127.2643, y: 127.2643}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &912850457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912850455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 573060e1551889e4ea5d867337b456b4, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 0
+  m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &912850458
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912850455}
+  m_CullTransparentMesh: 1
 --- !u!1 &1102840974 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7124556966001910350, guid: 2c2eab4009a8df149ad476775e1e3048, type: 3}
@@ -1295,7 +1442,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1102840977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1741354323}
+        m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
+        m_MethodName: OnAnswerSelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1102840977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,6 +2226,7 @@ RectTransform:
   - {fileID: 1562832004}
   - {fileID: 7867303}
   - {fileID: 821143650}
+  - {fileID: 912850456}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2088,12 +2248,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionText: {fileID: 7867304}
-  question: {fileID: 11400000, guid: a02bebb0e8d659a4bbab5e2c3e95d5be, type: 2}
+  questions:
+  - {fileID: 11400000, guid: a02bebb0e8d659a4bbab5e2c3e95d5be, type: 2}
+  - {fileID: 11400000, guid: 22deb07e2169df047859b137e57ce890, type: 2}
+  - {fileID: 11400000, guid: 48153bdb5b5677b4b81862546d48367d, type: 2}
+  - {fileID: 11400000, guid: 3611fb8a30d9d734f9d2014bde06f436, type: 2}
+  - {fileID: 11400000, guid: 49124bb1235c4404c9168e53f4b52d2a, type: 2}
   answerButtons:
   - {fileID: 1924933837}
   - {fileID: 208304431}
   - {fileID: 1102840974}
   - {fileID: 692223624}
+  defaultAnswerSprite: {fileID: 21300000, guid: 2de3a0520c30894489066155d5790687, type: 3}
+  correctAnswerSprite: {fileID: 21300000, guid: 08aee848bec3a3b46a8c4d8b62c8291b, type: 3}
+  timerImage: {fileID: 912850457}
 --- !u!1 &1924933837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7124556966001910350, guid: 2c2eab4009a8df149ad476775e1e3048, type: 3}
@@ -2147,7 +2315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1924933840}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1741354323}
+        m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
+        m_MethodName: OnAnswerSelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1924933840
 MonoBehaviour:
   m_ObjectHideFlags: 0
