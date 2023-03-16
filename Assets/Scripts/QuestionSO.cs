@@ -15,13 +15,13 @@ public class QuestionSO : ScriptableObject
 
     public string GetPlaceholderQuestion()
     {
-
         return question; 
     }
 
     public string GetAnswer(int index) {
         return answers[index];
     }
+
     public int GetCorrectAnswerIndex()
     {
         return correctAnswerIndex;

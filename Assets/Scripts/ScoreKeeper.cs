@@ -24,14 +24,13 @@ public class ScoreKeeper : MonoBehaviour
 
     public void IncrementQuestionsSeen()
     {
-        if (questionsSeen > 1 && answeredQuestion)
+        if (questionsSeen > 0 && answeredQuestion)
         {
             questionsSeen++;
         }
         else if (questionsSeen == 1 && !answeredQuestion)
         {
             answeredQuestion = true;
-            questionsSeen -= 1;
         }
     }
 

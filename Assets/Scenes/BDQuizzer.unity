@@ -2749,7 +2749,6 @@ MonoBehaviour:
   timerImage: {fileID: 912850457}
   scoreText: {fileID: 548517144}
   progressBar: {fileID: 2025911624}
-  isComplete: 0
 --- !u!1 &1924933837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7124556966001910350, guid: 2c2eab4009a8df149ad476775e1e3048, type: 3}

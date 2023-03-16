@@ -1,55 +1,58 @@
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+namespace BDQuizzer
 {
-    [SerializeField] float timeToCompleteQuestion = 60f;
-    [SerializeField] float timeToShowCorrectAnswer = 30f;
-
-    public bool loadNextQuestion;
-    public bool isAnsweringQuestion = true;
-    public float fillFraction;
-
-    float timerValue;
-
-    void Update()
+    public class Timer : MonoBehaviour
     {
-        UpdateTimer();
-    }
+        [SerializeField] float timeToCompleteQuestion = 60f;
+        [SerializeField] float timeToShowCorrectAnswer = 30f;
 
-    public void CancelTimer()
-    {
-        timerValue = 0;
-    }
+        public bool loadNextQuestion;
+        public bool isAnsweringQuestion = true;
+        public float fillFraction;
 
+        float timerValue;
 
-    void UpdateTimer()
-    {
-        timerValue -= Time.deltaTime;
+        //void Update()
+        //{
+        //    UpdateTimer();
+        //}
 
-        if (isAnsweringQuestion)
+        public void CancelTimer()
         {
-            if (timerValue > 0)
-            {
-                fillFraction = timerValue / timeToCompleteQuestion;
-            }
-            else
-            {
-                isAnsweringQuestion = false;
-                timerValue = timeToShowCorrectAnswer;
-            }
-
+            timerValue = 0;
         }
-        else
+
+
+        public void UpdateTimer()
         {
-            if (timerValue > 0)
+            timerValue -= Time.deltaTime;
+
+            if (isAnsweringQuestion)
             {
-                fillFraction = timerValue / timeToShowCorrectAnswer;
+                if (timerValue > 0)
+                {
+                    fillFraction = timerValue / timeToCompleteQuestion;
+                }
+                else
+                {
+                    isAnsweringQuestion = false;
+                    timerValue = timeToShowCorrectAnswer;
+                }
+
             }
             else
             {
-                isAnsweringQuestion = true;
-                timerValue = timeToShowCorrectAnswer;
-                loadNextQuestion = true;
+                if (timerValue > 0)
+                {
+                    fillFraction = timerValue / timeToShowCorrectAnswer;
+                }
+                else
+                {
+                    isAnsweringQuestion = true;
+                    timerValue = timeToShowCorrectAnswer;
+                    loadNextQuestion = true;
+                }
             }
         }
     }
