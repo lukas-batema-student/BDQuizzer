@@ -14,3 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   question: What is BatemaDevelopment's programming journey's purpose, according
     to them?
+  answers:
+  - we like fortnite
+  - This is defintley the right answer, Joe!
+  - '"I help others start their own journey, instead of offering expensive services,
+    so people with low income may be able to get their hands on tech that is considered
+    futuristic and extremely expensive, as of today, someday.'
+  - What is this journey you talk about?
+  correctAnswerIndex: 2

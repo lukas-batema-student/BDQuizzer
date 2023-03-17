@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ScoreKeeper : MonoBehaviour
 {
-    bool answeredQuestion = false;
+    bool answeredQuestion;
     int correctAnswers = 0;
     int questionsSeen = 1;
 

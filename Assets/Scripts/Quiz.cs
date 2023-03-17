@@ -1,7 +1,7 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
 
 namespace BDQuizzer
 {
@@ -10,13 +10,14 @@ namespace BDQuizzer
         [Header("Questions")]
         [SerializeField] TextMeshProUGUI questionText;
         [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
-        [SerializeField] QuestionSO currentQuestion;
+        QuestionSO currentQuestion;
 
         [Header("Answers")]
         [SerializeField] GameObject[] answerButtons;
-        bool hasAnsweredEarly;
+        int correctAnswerIndex;
+        bool hasAnsweredEarly = true;
 
-        [Header("Buttons Colours")]
+        [Header("Button Colours")]
         [SerializeField] Sprite defaultAnswerSprite;
         [SerializeField] Sprite correctAnswerSprite;
 
@@ -31,24 +32,32 @@ namespace BDQuizzer
         [Header("Progress Bar")]
         [SerializeField] Slider progressBar;
 
-        bool isComplete = false;
+        public bool isComplete = false;
 
-        void Start()
+        void Awake()
         {
             timer = FindObjectOfType<Timer>();
             scoreKeeper = FindObjectOfType<ScoreKeeper>();
             progressBar.maxValue = questions.Count;
             progressBar.value = 0;
+        }
 
+        void Start()
+        {
             GetNextQuestion();
         }
 
         void Update()
         {
-            timer.UpdateTimer();
-
+            timerImage.fillAmount = timer.fillFraction;
             if (timer.loadNextQuestion)
             {
+                if (progressBar.value == progressBar.maxValue)
+                {
+                    isComplete = true;
+                    return;
+                }
+
                 hasAnsweredEarly = false;
                 GetNextQuestion();
                 timer.loadNextQuestion = false;
@@ -67,42 +76,34 @@ namespace BDQuizzer
 
         public void OnAnswerSelected(int index)
         {
+            hasAnsweredEarly = true;
             DisplayAnswer(index);
             SetButtonState(false);
-            hasAnsweredEarly = true;
             timer.CancelTimer();
             scoreText.text = $"Score: {scoreKeeper.CalculateCurrentScore()}%";
-
-            if (progressBar.value == progressBar.maxValue)
-            {
-                isComplete = true;
-            }
-
         }
 
         void DisplayAnswer(int index)
         {
-            if (!isComplete)
+            if (index == currentQuestion.GetCorrectAnswerIndex())
             {
-                if (index == currentQuestion.GetCorrectAnswerIndex())
-                {
-                    questionText.text = "You are one step closer to becoming a true BatemaDevelopment historian!";
-                    scoreKeeper.IncrementCorrectAnswers();
-                }
-                else
-                {
-                    questionText.text = "You aren't a true BatemaDevelopment historian!" +
-                        "\n" +
-                        $"Answer: {currentQuestion.GetAnswer(currentQuestion.GetCorrectAnswerIndex())}";
-                }
-
-                answerButtons[currentQuestion.GetCorrectAnswerIndex()].GetComponent<Image>().sprite = correctAnswerSprite;
+                questionText.text = "You are one step closer to becoming a true BatemaDevelopment historian!";
+                scoreKeeper.IncrementCorrectAnswers();
             }
+            else
+            {
+                correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
+                questionText.text = "You aren't a true BatemaDevelopment historian!" +
+                    "\n" +
+                    $"Answer: {currentQuestion.GetAnswer(currentQuestion.GetCorrectAnswerIndex())}";
+            }
+
+            answerButtons[currentQuestion.GetCorrectAnswerIndex()].GetComponent<Image>().sprite = correctAnswerSprite;
         }
 
         void GetNextQuestion()
         {
-            if (questions.Count > 0 && questions.Count < 5)
+            if (questions.Count > 0)
             {
                 SetButtonState(true);
                 SetDefaultButtonSprites();
@@ -111,40 +112,14 @@ namespace BDQuizzer
                 progressBar.value++;
                 scoreKeeper.IncrementQuestionsSeen();
             }
-            else if (questions.Count == 0)
-            {
-                if (scoreKeeper.CalculateCurrentScore() == 100)
-                {
-                    questionText.text = $"You have completed the quiz! Your score was {scoreKeeper.CalculateCurrentScore()}%. You passed, but how do you know this much? Did you stalk me? As a precaution, this will count as a faliure for the reason of stalking me >:)";
-                }
-                else
-                {
-                    questionText.text = $"You have completed the quiz! Your score was {scoreKeeper.CalculateCurrentScore()}%. You failed, as you don't know much about me >:)";
-                }
-            }
-            else if (questions.Count == 5)
-            {
-                timer.isAnsweringQuestion = false;
-
-                timer.CancelTimer();
-                timer.CancelTimer();
-
-                SetDefaultButtonSprites();
-                GetRandomQuestion();
-                DisplayQuestion();
-            }
         }
 
         void GetRandomQuestion()
         {
-            if (questions.Contains(currentQuestion) && questions.Count < 5)
-            {
-                int index = Random.Range(0, questions.Count);
-                currentQuestion = questions[index];
+            int index = Random.Range(0, questions.Count);
+            currentQuestion = questions[index];
 
-                questions.Remove(currentQuestion);
-            }
-            else if (questions.Count == 5)
+            if (questions.Contains(currentQuestion))
             {
                 questions.Remove(currentQuestion);
             }

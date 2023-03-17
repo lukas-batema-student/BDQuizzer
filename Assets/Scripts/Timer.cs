@@ -13,10 +13,10 @@ namespace BDQuizzer
 
         float timerValue;
 
-        //void Update()
-        //{
-        //    UpdateTimer();
-        //}
+        void Update()
+        {
+            UpdateTimer();
+        }
 
         public void CancelTimer()
         {
@@ -24,7 +24,7 @@ namespace BDQuizzer
         }
 
 
-        public void UpdateTimer()
+        void UpdateTimer()
         {
             timerValue -= Time.deltaTime;
 
