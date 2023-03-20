@@ -15,7 +15,7 @@ namespace BDQuizzer
         [Header("Answers")]
         [SerializeField] GameObject[] answerButtons;
         int correctAnswerIndex;
-        bool hasAnsweredEarly = true;
+        bool hasAnsweredEarly = false;
 
         [Header("Button Colours")]
         [SerializeField] Sprite defaultAnswerSprite;
@@ -44,13 +44,14 @@ namespace BDQuizzer
 
         void Start()
         {
-            GetNextQuestion();
+            timer.isAnsweringQuestion = false;
+            timer.loadNextQuestion = true;
         }
 
         void Update()
         {
             timerImage.fillAmount = timer.fillFraction;
-            if (timer.loadNextQuestion)
+            if (timer.loadNextQuestion && timer.isAnsweringQuestion)
             {
                 if (progressBar.value == progressBar.maxValue)
                 {
@@ -62,15 +63,22 @@ namespace BDQuizzer
                 GetNextQuestion();
                 timer.loadNextQuestion = false;
             }
+            else if (timer.loadNextQuestion && !timer.isAnsweringQuestion)
+            {
+                hasAnsweredEarly = false;
+                GetFirstQuestion();
+                timer.loadNextQuestion = false;
+            }
             else if (!hasAnsweredEarly && !timer.isAnsweringQuestion)
             {
                 int i = 0;
-                while (i != currentQuestion.GetCorrectAnswerIndex())
+                while (i == currentQuestion.GetCorrectAnswerIndex())
                 {
                     i++;
                 }
                 DisplayAnswer(i);
                 SetButtonState(false);
+                scoreText.text = $"Score: {scoreKeeper.CalculateCurrentScore()}%";
             }
         }
 
@@ -111,6 +119,17 @@ namespace BDQuizzer
                 DisplayQuestion();
                 progressBar.value++;
                 scoreKeeper.IncrementQuestionsSeen();
+            }
+        }
+
+        void GetFirstQuestion()
+        {
+            if (progressBar.maxValue == questions.Count)
+            {
+                questions.Remove(questions[0]);
+                GetRandomQuestion();
+                DisplayQuestion();
+                progressBar.value--;
             }
         }
 

@@ -32,7 +32,8 @@ namespace BDQuizzer
             {
                 if (timerValue > 0)
                 {
-                    fillFraction = timerValue / timeToCompleteQuestion;
+                    fillFraction = (timerValue / timeToCompleteQuestion) / ((timeToShowCorrectAnswer / timeToCompleteQuestion) * (timeToCompleteQuestion / timeToShowCorrectAnswer));
+
                 }
                 else
                 {
@@ -45,7 +46,7 @@ namespace BDQuizzer
             {
                 if (timerValue > 0)
                 {
-                    fillFraction = timerValue / timeToShowCorrectAnswer;
+                    fillFraction = (timerValue / timeToShowCorrectAnswer) / ((timeToCompleteQuestion / timeToShowCorrectAnswer) * (timeToShowCorrectAnswer / timeToCompleteQuestion));
                 }
                 else
                 {

@@ -1,41 +1,36 @@
 using static System.Math;
 using UnityEngine;
 
-public class ScoreKeeper : MonoBehaviour
+namespace BDQuizzer
 {
-    bool answeredQuestion;
-    int correctAnswers = 0;
-    int questionsSeen = 1;
-
-    public int GetCorrectAnswers()
+    public class ScoreKeeper : MonoBehaviour
     {
-        return correctAnswers;
-    }
+        int correctAnswers = 0;
+        int questionsSeen = 0;
 
-    public int GetQuestionsSeen()
-    {
-        return questionsSeen;
-    }
+        public int GetCorrectAnswers()
+        {
+            return correctAnswers;
+        }
 
-    public void IncrementCorrectAnswers()
-    {
-        correctAnswers++;
-    }
+        public int GetQuestionsSeen()
+        {
+            return questionsSeen;
+        }
 
-    public void IncrementQuestionsSeen()
-    {
-        if (questionsSeen > 0 && answeredQuestion)
+        public void IncrementCorrectAnswers()
+        {
+            correctAnswers++;
+        }
+
+        public void IncrementQuestionsSeen()
         {
             questionsSeen++;
         }
-        else if (questionsSeen == 1 && !answeredQuestion)
-        {
-            answeredQuestion = true;
-        }
-    }
 
-    public float CalculateCurrentScore()
-    {
-        return (float) Round((float) (correctAnswers / questionsSeen) * 100, 2);
+        public int CalculateCurrentScore()
+        {
+            return (int) Round((float) correctAnswers / questionsSeen * 100);
+        }
     }
 }
