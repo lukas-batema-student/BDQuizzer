@@ -17,7 +17,7 @@ namespace BDQuizzer
         {
             if (scoreKeeper.CalculateCurrentScore() == 100)
             {
-                finalScoreText.text = $"You have completed the quiz!\nYour score was {scoreKeeper.CalculateCurrentScore()}%.\nYou passed, but how do you know this much? Did you stalk me? As a precaution, this will count as a faliure for the reason of stalking me >:)";
+                finalScoreText.text = $"You have completed the quiz!\nYour score was {scoreKeeper.CalculateCurrentScore()}%.\nYou passed, but how do you know this much? Did you stalk me? As a precaution, this will count as a failure for the reason of stalking me >:)";
             }
             else
             {
