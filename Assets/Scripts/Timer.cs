@@ -4,8 +4,8 @@ namespace BDQuizzer
 {
     public class Timer : MonoBehaviour
     {
-        [SerializeField] float timeToCompleteQuestion = 60f;
-        [SerializeField] float timeToShowCorrectAnswer = 30f;
+        [SerializeField] float timeToCompleteQuestion = 30f;
+        [SerializeField] float timeToShowCorrectAnswer = 10f;
 
         public bool loadNextQuestion;
         public bool isAnsweringQuestion = true;
@@ -32,7 +32,7 @@ namespace BDQuizzer
             {
                 if (timerValue > 0)
                 {
-                    fillFraction = (timerValue / timeToCompleteQuestion) / ((timeToShowCorrectAnswer / timeToCompleteQuestion) * (timeToCompleteQuestion / timeToShowCorrectAnswer));
+                    fillFraction = (timerValue * (timeToCompleteQuestion / timeToShowCorrectAnswer)) / timeToCompleteQuestion;
 
                 }
                 else
@@ -46,7 +46,7 @@ namespace BDQuizzer
             {
                 if (timerValue > 0)
                 {
-                    fillFraction = (timerValue / timeToShowCorrectAnswer) / ((timeToCompleteQuestion / timeToShowCorrectAnswer) * (timeToShowCorrectAnswer / timeToCompleteQuestion));
+                    fillFraction = timerValue / timeToShowCorrectAnswer;
                 }
                 else
                 {
